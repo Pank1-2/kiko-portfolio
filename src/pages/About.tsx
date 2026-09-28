@@ -1,11 +1,12 @@
 import { Viewfinder } from "../components/Viewfinder";
+import { asset } from "../asset";
 
 export function About() {
   return (
     <main className="shell about-page">
       <div className="about-media">
         <Viewfinder
-          src="/work/hero.jpg"
+          src={asset("/work/hero.jpg")}
           alt="Hanok street overlooking the city"
           ratio="tall"
           focus="50% 42%"

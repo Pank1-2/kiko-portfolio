@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef, useState } from "react";
+import { asset } from "../asset";
 import { IbmMark } from "./IbmMark";
 
 type Props = {
@@ -6,9 +7,9 @@ type Props = {
 };
 
 const frames = [
-  { src: "/photos/print-1.png", className: "print-left" },
-  { src: "/photos/print-2.png", className: "print-up" },
-  { src: "/photos/print-3.png", className: "print-right" },
+  { src: asset("/photos/print-1.png"), className: "print-left" },
+  { src: asset("/photos/print-2.png"), className: "print-up" },
+  { src: asset("/photos/print-3.png"), className: "print-right" },
 ];
 
 const coverTags = ["Product", "UX", "UI", "IBM", "SF Bay"];

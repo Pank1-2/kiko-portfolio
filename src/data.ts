@@ -1,3 +1,4 @@
+import { asset } from "./asset";
 export type Finding = { title: string; text: string };
 export type Step = { n: string; title: string; text: string };
 export type Thought = { question: string; decision: string; why: string };
@@ -109,7 +110,7 @@ export const projects: Project[] = [
       "Bringing an existing alerting experience into Concert for Z, navigating complex mainframe architecture to determine what belonged in the new product.",
     summary:
       "Bringing an existing alerting experience into Concert for Z.",
-    image: "/work/ibm-concert.svg",
+    image: asset("/work/ibm-concert.svg"),
     tags: ["Product design", "Complex systems", "Design system"],
     roleHeadline: "UX Designer",
     teamHeadline: "IBM",
@@ -130,7 +131,7 @@ export const projects: Project[] = [
       "Bringing AI memory into the workflow with an in-context experience that surfaces relevant past conversations without leaving the LLM.",
     summary:
       "Chrome extension that automatically captures and organizes your conversations across all AI platforms.",
-    image: "/work/memory-box.png",
+    image: asset("/work/memory-box.png"),
     tags: ["Product design", "AI", "LLM", "0 → 1"],
     roleHeadline: "UI/UX Team Lead",
     teamHeadline: "3 members",
@@ -214,12 +215,12 @@ export const projects: Project[] = [
         ],
         shots: [
           {
-            src: "/work/memory-box/lofi-inline.png",
+            src: asset("/work/memory-box/lofi-inline.png"),
             frame: "flat",
             caption: "**First pass** — panel anchored *inside* the chat box, tied to the model switcher",
           },
           {
-            src: "/work/memory-box/lofi-corner.png",
+            src: asset("/work/memory-box/lofi-corner.png"),
             frame: "flat",
             caption: "**Second pass** — fixed position, independent of host layout, *draggable*",
           },
@@ -231,7 +232,7 @@ export const projects: Project[] = [
         body: [
           "After feedback from engineers and the PM we refined the dashboard and **moved the toggle** to make the experience more seamless and less intrusive. It started inside the LLM chat box; we moved it to the *bottom-right corner* so it stays consistent across platforms. We also made it **draggable**, so people control where it lives on their screen.",
         ],
-        image: "/work/memory-box.png",
+        image: asset("/work/memory-box.png"),
         caption: "Context Sync on ChatGPT — draggable control in the bottom-right",
       },
       {
@@ -255,7 +256,7 @@ export const projects: Project[] = [
       "Reimagining the grocery-store flower shopping experience with a kiosk that helps customers build, visualize, and personalize bouquets.",
     summary:
       "Grocery store kiosk for easy flower bouquet customization and visualization.",
-    image: "/work/bloom.png",
+    image: asset("/work/bloom.png"),
     tags: ["Interaction design", "Research", "Physical + digital", "Prototyping"],
     roleHeadline: "UI/UX Designer + Researcher",
     teamHeadline: "4 members",
@@ -281,7 +282,7 @@ export const projects: Project[] = [
         ],
         shots: [
           {
-            src: "/work/bloom/fieldwork.jpg",
+            src: asset("/work/bloom/fieldwork.jpg"),
             frame: "photo",
             compact: true,
             caption:
@@ -312,17 +313,17 @@ export const projects: Project[] = [
         ],
         shots: [
           {
-            src: "/work/bloom/persona-sophia.jpg",
+            src: asset("/work/bloom/persona-sophia.jpg"),
             frame: "flat",
             caption: "Persona — *Sophia,* weekly self-buyer matching her aesthetic",
           },
           {
-            src: "/work/bloom/persona-alex.jpg",
+            src: asset("/work/bloom/persona-alex.jpg"),
             frame: "flat",
             caption: "Persona — *Alex,* budget gifting with no floral knowledge",
           },
           {
-            src: "/work/bloom/storyboard.jpg",
+            src: asset("/work/bloom/storyboard.jpg"),
             frame: "flat",
             narrow: true,
             caption:
@@ -358,28 +359,28 @@ export const projects: Project[] = [
         ],
         shots: [
           {
-            src: "/work/bloom/user-flow.png",
+            src: asset("/work/bloom/user-flow.png"),
             frame: "flat",
             caption: "User flow — onboarding into **shop** and **visualization**, with search, filter, and pet-friendly branches",
           },
           {
-            src: "/work/bloom/moodboard.jpg",
+            src: asset("/work/bloom/moodboard.jpg"),
             frame: "flat",
             caption: "Mood board — florist carts, editorial florals, and soft botanical texture",
           },
           {
-            src: "/work/bloom/style-guide.jpg",
+            src: asset("/work/bloom/style-guide.jpg"),
             frame: "flat",
             caption: "Style guide — *Lato* for headings, *Open Sans* for text, and a botanical palette",
           },
           {
-            src: "/work/bloom/lofi-empty.png",
+            src: asset("/work/bloom/lofi-empty.png"),
             frame: "flat",
             narrow: true,
             caption: "Lo-fi — inventory grid with the preview area still empty",
           },
           {
-            src: "/work/bloom/lofi-selected.png",
+            src: asset("/work/bloom/lofi-selected.png"),
             frame: "flat",
             narrow: true,
             caption: "Lo-fi — a stem added to the tray, preview filling the right side",
@@ -401,21 +402,21 @@ export const projects: Project[] = [
           "Pairing suggestions and **per-stem pricing** surfaced at the point of choice, not after",
           "Printed receipt doubling as a **pick list** for the floral section",
         ],
-        image: "/work/bloom.png",
+        image: asset("/work/bloom.png"),
         caption: "Inventory grid, live preview, and a tray of chosen stems",
         shots: [
           {
-            src: "/work/bloom/hifi-welcome.png",
+            src: asset("/work/bloom/hifi-welcome.png"),
             frame: "flat",
             caption: "Welcome — one question, one **Start**",
           },
           {
-            src: "/work/bloom/hifi-shop.jpg",
+            src: asset("/work/bloom/hifi-shop.jpg"),
             frame: "flat",
             caption: "Shop — live inventory with occasion, sale, and new-arrival filters",
           },
           {
-            src: "/work/bloom/hifi-detail.jpg",
+            src: asset("/work/bloom/hifi-detail.jpg"),
             frame: "flat",
             narrow: true,
             caption: "Flower detail — price, *pet-friendly* tag, care notes, and pairing suggestions beside the live preview",
@@ -431,12 +432,12 @@ export const projects: Project[] = [
         ],
         shots: [
           {
-            src: "/work/bloom/kiosk-front.jpg",
+            src: asset("/work/bloom/kiosk-front.jpg"),
             frame: "photo",
             caption: "The built kiosk running the welcome screen",
           },
           {
-            src: "/work/bloom/kiosk-angle.jpg",
+            src: asset("/work/bloom/kiosk-angle.jpg"),
             frame: "photo",
             caption: "Three-quarter view — signage, floral crown, and the receipt slot",
           },
@@ -463,7 +464,7 @@ export const projects: Project[] = [
       "Redesigning a nonprofit website to make resources easier to find, navigate, and access for underserved students and volunteers.",
     summary:
       "Website redesign to enhance access and reach for underserved students.",
-    image: "/work/paol-cover.jpg",
+    image: asset("/work/paol-cover.jpg"),
     tags: ["User research", "Web design", "Stakeholder collaboration"],
     roleHeadline: "UI/UX Design Lead + Researcher",
     teamHeadline: "5 members",
@@ -490,7 +491,7 @@ export const projects: Project[] = [
         ],
         shots: [
           {
-            src: "/work/paol/before-site.jpg",
+            src: asset("/work/paol/before-site.jpg"),
             frame: "flat",
             crop: true,
             caption:
@@ -524,7 +525,7 @@ export const projects: Project[] = [
         ],
         shots: [
           {
-            src: "/work/paol/affinity-map.jpg",
+            src: asset("/work/paol/affinity-map.jpg"),
             frame: "flat",
             caption:
               "Affinity map — clustered into **complex navigation** and **insufficient content**",
@@ -535,24 +536,24 @@ export const projects: Project[] = [
         ],
         shotsAfter: [
           {
-            src: "/work/paol/competitors.jpg",
+            src: asset("/work/paol/competitors.jpg"),
             frame: "flat",
             caption:
               "Competitive analysis — UX, responsiveness, identity, and tutor profiles across four nonprofits",
           },
           {
-            src: "/work/paol/swot.jpg",
+            src: asset("/work/paol/swot.jpg"),
             frame: "flat",
             caption:
               "SWOT — visual appeal a strength; *mobile compatibility* and sparse tutor info the risks",
           },
           {
-            src: "/work/paol/persona-emma.jpg",
+            src: asset("/work/paol/persona-emma.jpg"),
             frame: "flat",
             caption: "Persona — *Emma, 16*",
           },
           {
-            src: "/work/paol/persona-rachel.jpg",
+            src: asset("/work/paol/persona-rachel.jpg"),
             frame: "flat",
             caption: "Persona — *Rachel, 18*",
           },
@@ -569,13 +570,13 @@ export const projects: Project[] = [
         ],
         shots: [
           {
-            src: "/work/paol/ia-before.png",
+            src: asset("/work/paol/ia-before.png"),
             frame: "flat",
             caption:
               "**Before** — six top-level labels, key actions buried under *Puerto Rican Branch* and *Additional Resources*",
           },
           {
-            src: "/work/paol/ia-after.png",
+            src: asset("/work/paol/ia-after.png"),
             frame: "flat",
             caption:
               "**After** — five sections, *Apply as a Student* and *Apply as a Tutor* promoted into **Get Involved**",
@@ -586,7 +587,7 @@ export const projects: Project[] = [
         ],
         shotsAfter: [
           {
-            src: "/work/paol/lofi-home.png",
+            src: asset("/work/paol/lofi-home.png"),
             narrow: true,
             frame: "flat",
             crop: true,
@@ -605,13 +606,13 @@ export const projects: Project[] = [
         ],
         shots: [
           {
-            src: "/work/paol/before-site.jpg",
+            src: asset("/work/paol/before-site.jpg"),
             frame: "flat",
             crop: true,
             caption: "**Before** — mission buried, three competing buttons",
           },
           {
-            src: "/work/paol/after-home.jpg",
+            src: asset("/work/paol/after-home.jpg"),
             frame: "flat",
             crop: true,
             caption: "**After** — mission stated first, one primary action, real students",
@@ -637,7 +638,7 @@ export const experience = [
     org: "IBM",
     place: "San Jose, CA",
     note: "End-to-end product design for IBM Concert for Z, using AI to prototype, explore, and iterate faster.",
-    logo: "/logos/ibm.png",
+    logo: asset("/logos/ibm.png"),
   },
   {
     dates: "Oct 2025 — Jan 2026",
@@ -645,7 +646,7 @@ export const experience = [
     org: "Memory Box",
     place: "Remote",
     note: "Led a 3-person design team building an AI browser extension for managing conversations across chat platforms.",
-    logo: "/logos/hawl.png",
+    logo: asset("/logos/hawl.png"),
   },
   {
     dates: "Sep 2025 — Nov 2025",
@@ -653,6 +654,6 @@ export const experience = [
     org: "Lillup",
     place: "Remote",
     note: "Product design across research, flows, and interfaces in a fast-moving startup.",
-    logo: "/logos/lillup.png",
+    logo: asset("/logos/lillup.png"),
   },
 ];

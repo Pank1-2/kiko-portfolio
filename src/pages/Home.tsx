@@ -4,6 +4,7 @@ import { FrameCard } from "../components/FrameCard";
 import { IbmMark } from "../components/IbmMark";
 import { PhotoIntro } from "../components/PhotoIntro";
 import { Viewfinder } from "../components/Viewfinder";
+import { asset } from "../asset";
 import { experience, projects } from "../data";
 
 function Hero() {
@@ -31,7 +32,7 @@ function Hero() {
         </div>
         <div className="hero-portrait">
           <Viewfinder
-            src="/work/hero.jpg"
+            src={asset("/work/hero.jpg")}
             alt="Hanok street overlooking the city"
             ratio="tall"
             focus="50% 42%"

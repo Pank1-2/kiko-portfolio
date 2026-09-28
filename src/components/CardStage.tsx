@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { asset } from "../asset";
 import type { Project } from "../data";
 
 type Treatment = "float" | "fan" | "pedestal" | "flow" | "model" | "solo";
@@ -21,16 +22,16 @@ const CARD_STAGING: Record<string, Staging> = {
   // Single product still — readable on card + case study
   "memory-box": {
     treatment: "solo",
-    shots: ["/work/memory-box.png"],
+    shots: [asset("/work/memory-box.png")],
   },
   "bloom-studio": {
     treatment: "solo",
-    shots: ["/work/bloom.png"],
+    shots: [asset("/work/bloom.png")],
   },
   // Leave untouched
   "art-of-learning": {
     treatment: "flow",
-    shots: ["/work/paol/before-site.jpg", "/work/paol/after-home-hifi.jpg"],
+    shots: [asset("/work/paol/before-site.jpg"), asset("/work/paol/after-home-hifi.jpg")],
   },
 };
 
@@ -229,7 +230,7 @@ function IbmModel() {
       </div>
 
       <div className="ibm-logo-hero">
-        <img className="ibm-cover-mark" src="/ibm.svg" alt="" />
+        <img className="ibm-cover-mark" src={asset("/ibm.svg")} alt="" />
       </div>
     </div>
   );
