@@ -1,10 +1,18 @@
+const basePath = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
+
 const landedOnHome =
   typeof window !== "undefined" &&
-  (window.location.pathname === "/" || window.location.pathname === "/index.html");
+  (() => {
+    const path = window.location.pathname.replace(/\/$/, "") || "/";
+    const home = basePath || "/";
+    return path === home || path.endsWith("/index.html");
+  })();
 
 const bootNav =
   typeof performance !== "undefined"
-    ? performance.getEntriesByType("navigation")[0]
+    ? (performance.getEntriesByType("navigation")[0] as
+        | PerformanceNavigationTiming
+        | undefined)
     : undefined;
 
 let consumed = false;
