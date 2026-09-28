@@ -5172,6 +5172,10 @@ html[data-theme="dark"] .device-stage-violet {
     display: block;
     position: fixed;
     inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100dvh;
+    min-height: -webkit-fill-available;
     z-index: 58;
     border: 0;
     padding: 0;
@@ -5190,21 +5194,29 @@ html[data-theme="dark"] .device-stage-violet {
     position: fixed;
     top: 0;
     right: 0;
+    bottom: 0;
     z-index: 59;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
     width: min(78vw, 280px);
-    height: 100svh;
+    /* Avoid 100svh — on iOS Safari it often falls short of the visible viewport */
+    height: auto;
+    min-height: 100%;
+    min-height: 100dvh;
+    min-height: -webkit-fill-available;
     margin: 0;
-    padding: calc(var(--nav-h) + var(--space-4)) var(--space-5) var(--space-6);
+    padding: calc(var(--nav-h) + var(--space-4)) var(--space-5)
+      calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
     background: var(--paper);
     border-left: 1px solid var(--line);
+    border-radius: 0;
     box-shadow: var(--shadow);
     transform: translateX(105%);
     transition: transform 0.28s cubic-bezier(0.23, 1, 0.32, 1);
     pointer-events: none;
+    box-sizing: border-box;
   }
 
   .nav-drawer-close {
@@ -5266,6 +5278,12 @@ html[data-theme="dark"] .device-stage-violet {
   html.nav-menu-open,
   html.nav-menu-open body {
     overflow: hidden;
+    /* Helps iOS compute -webkit-fill-available for the fixed drawer */
+    height: 100%;
+  }
+
+  html.nav-menu-open {
+    height: -webkit-fill-available;
   }
 
   .job-head {
