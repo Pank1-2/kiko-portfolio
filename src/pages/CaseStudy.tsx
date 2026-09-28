@@ -169,7 +169,9 @@ export function CaseStudy() {
           ← Case studies
         </Link>
         <p className="mono study-kicker">
-          {project.frame} · {project.category}
+          <span className="study-kicker-frame">{project.frame}</span>
+          {" · "}
+          {project.category}
         </p>
         <h1>{project.title}</h1>
         <p className="study-outcome">{project.outcome}</p>

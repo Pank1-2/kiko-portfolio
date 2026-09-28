@@ -3062,8 +3062,12 @@ main.study {
 }
 
 .study-kicker {
-  color: var(--navy);
+  color: var(--coral-text);
   margin: var(--space-6) 0 var(--space-4);
+}
+
+.study-kicker-frame {
+  font-weight: var(--weight-bold);
 }
 
 .study-intro h1 {
@@ -4023,7 +4027,7 @@ html[data-theme="dark"] .device-stage-violet {
   display: inline-flex;
   align-items: center;
   min-height: var(--tap);
-  color: var(--muted);
+  color: color-mix(in srgb, var(--ink) 62%, var(--muted));
   font-size: var(--text-md);
   letter-spacing: 0.08em;
   transition: color 0.2s ease;
