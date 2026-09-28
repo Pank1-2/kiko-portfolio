@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" fill="none">
+  <rect width="1440" height="900" fill="#001d6c"/>
+  <rect x="64" y="56" width="1312" height="788" rx="12" fill="#f4f4f4"/>
+  <!-- Carbon-style left rail -->
+  <rect x="64" y="56" width="72" height="788" fill="#161616"/>
+  <rect x="84" y="88" width="32" height="32" rx="2" fill="#0f62fe"/>
+  <rect x="88" y="160" width="24" height="4" rx="1" fill="#525252"/>
+  <rect x="88" y="180" width="24" height="4" rx="1" fill="#525252"/>
+  <rect x="88" y="200" width="24" height="4" rx="1" fill="#0f62fe"/>
+  <rect x="88" y="220" width="24" height="4" rx="1" fill="#525252"/>
+  <rect x="88" y="240" width="24" height="4" rx="1" fill="#525252"/>
+  <!-- Top header -->
+  <rect x="136" y="56" width="1240" height="72" fill="#ffffff"/>
+  <rect x="136" y="127" width="1240" height="1" fill="#e0e0e0"/>
+  <!-- IBM 8-bar logo -->
+  <g transform="translate(168 78)" fill="#0f62fe">
+    <rect y="0" width="10" height="2.2"/>
+    <rect y="3.4" width="10" height="2.2"/>
+    <rect y="6.8" width="10" height="2.2"/>
+    <rect y="10.2" width="10" height="2.2"/>
+    <rect y="13.6" width="10" height="2.2"/>
+    <rect y="17" width="10" height="2.2"/>
+    <rect y="20.4" width="10" height="2.2"/>
+    <rect y="23.8" width="10" height="2.2"/>
+    <rect x="13" y="0" width="12" height="2.2"/>
+    <rect x="13" y="3.4" width="12" height="2.2"/>
+    <rect x="13" y="6.8" width="4" height="2.2"/>
+    <rect x="21" y="6.8" width="4" height="2.2"/>
+    <rect x="13" y="10.2" width="4" height="2.2"/>
+    <rect x="21" y="10.2" width="4" height="2.2"/>
+    <rect x="13" y="13.6" width="12" height="2.2"/>
+    <rect x="13" y="17" width="12" height="2.2"/>
+    <rect x="13" y="20.4" width="4" height="2.2"/>
+    <rect x="21" y="20.4" width="4" height="2.2"/>
+    <rect x="13" y="23.8" width="4" height="2.2"/>
+    <rect x="21" y="23.8" width="4" height="2.2"/>
+    <rect x="28" y="0" width="16" height="2.2"/>
+    <rect x="28" y="3.4" width="16" height="2.2"/>
+    <rect x="28" y="6.8" width="16" height="2.2"/>
+    <rect x="33" y="10.2" width="6" height="2.2"/>
+    <rect x="33" y="13.6" width="6" height="2.2"/>
+    <rect x="33" y="17" width="6" height="2.2"/>
+    <rect x="33" y="20.4" width="6" height="2.2"/>
+    <rect x="33" y="23.8" width="6" height="2.2"/>
+  </g>
+  <text x="228" y="100" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="18" font-weight="600">Concert for Z</text>
+  <text x="360" y="100" fill="#6f6f6f" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14">Alert Monitor</text>
+  <rect x="1180" y="78" width="140" height="32" rx="0" fill="#0f62fe"/>
+  <text x="1204" y="99" fill="#ffffff" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="600">Create alert</text>
+  <!-- Page title -->
+  <text x="168" y="196" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="28" font-weight="400">Alert monitor creation</text>
+  <text x="168" y="228" fill="#525252" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14">Define thresholds, routing, and mainframe signal sources for Concert for Z.</text>
+  <!-- Metric tiles -->
+  <rect x="168" y="268" width="280" height="120" fill="#ffffff" stroke="#e0e0e0"/>
+  <text x="188" y="300" fill="#525252" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="12">Active monitors</text>
+  <text x="188" y="340" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="36" font-weight="300">24</text>
+  <rect x="188" y="360" width="64" height="8" fill="#0f62fe"/>
+  <rect x="468" y="268" width="280" height="120" fill="#ffffff" stroke="#e0e0e0"/>
+  <text x="488" y="300" fill="#525252" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="12">Open alerts</text>
+  <text x="488" y="340" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="36" font-weight="300">7</text>
+  <rect x="488" y="360" width="64" height="8" fill="#ff832b"/>
+  <rect x="768" y="268" width="280" height="120" fill="#ffffff" stroke="#e0e0e0"/>
+  <text x="788" y="300" fill="#525252" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="12">Systems covered</text>
+  <text x="788" y="340" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="36" font-weight="300">12</text>
+  <rect x="788" y="360" width="64" height="8" fill="#198038"/>
+  <rect x="1068" y="268" width="244" height="120" fill="#ffffff" stroke="#e0e0e0"/>
+  <text x="1088" y="300" fill="#525252" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="12">Last sync</text>
+  <text x="1088" y="340" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="28" font-weight="300">2m ago</text>
+  <!-- Table -->
+  <rect x="168" y="420" width="1144" height="380" fill="#ffffff" stroke="#e0e0e0"/>
+  <rect x="168" y="420" width="1144" height="48" fill="#e8e8e8"/>
+  <text x="188" y="450" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="600">Monitor name</text>
+  <text x="520" y="450" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="600">Source</text>
+  <text x="780" y="450" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="600">Severity</text>
+  <text x="1000" y="450" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="600">Status</text>
+  <rect x="168" y="468" width="1144" height="1" fill="#e0e0e0"/>
+  <text x="188" y="502" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14">CPU threshold — LPAR cluster A</text>
+  <text x="520" y="502" fill="#525252" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14">z/OS · SMF</text>
+  <rect x="780" y="486" width="72" height="24" fill="#ffd7a0"/>
+  <text x="792" y="503" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="12">Warning</text>
+  <text x="1000" y="502" fill="#198038" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14">Enabled</text>
+  <rect x="168" y="528" width="1144" height="1" fill="#e0e0e0"/>
+  <text x="188" y="562" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14">Storage queue depth — SYSPLEX</text>
+  <text x="520" y="562" fill="#525252" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14">z/OS · RMF</text>
+  <rect x="780" y="546" width="56" height="24" fill="#ffd7d9"/>
+  <text x="792" y="563" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="12">Critical</text>
+  <text x="1000" y="562" fill="#198038" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14">Enabled</text>
+  <rect x="168" y="588" width="1144" height="1" fill="#e0e0e0"/>
+  <text x="188" y="622" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14">Job abend pattern — batch window</text>
+  <text x="520" y="622" fill="#525252" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14">JES2</text>
+  <rect x="780" y="606" width="56" height="24" fill="#a6c8ff"/>
+  <text x="798" y="623" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="12">Info</text>
+  <text x="1000" y="622" fill="#6f6f6f" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14">Draft</text>
+  <rect x="168" y="648" width="1144" height="1" fill="#e0e0e0"/>
+  <text x="188" y="682" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14">Network latency — Coupling Facility</text>
+  <text x="520" y="682" fill="#525252" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14">CF · structure</text>
+  <rect x="780" y="666" width="72" height="24" fill="#ffd7a0"/>
+  <text x="792" y="683" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="12">Warning</text>
+  <text x="1000" y="682" fill="#198038" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14">Enabled</text>
+  <rect x="168" y="708" width="1144" height="1" fill="#e0e0e0"/>
+  <text x="188" y="742" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14">Security exception — RACF audit</text>
+  <text x="520" y="742" fill="#525252" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14">Security</text>
+  <rect x="780" y="726" width="56" height="24" fill="#ffd7d9"/>
+  <text x="792" y="743" fill="#161616" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="12">Critical</text>
+  <text x="1000" y="742" fill="#198038" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14">Enabled</text>
+</svg>
