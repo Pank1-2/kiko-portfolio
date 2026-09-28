@@ -65,28 +65,33 @@ export function ScrollFX() {
   useEffect(() => {
     const root = document.documentElement;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let scrollRaf = 0;
 
     const onScroll = () => {
-      const max = root.scrollHeight - root.clientHeight;
-      root.style.setProperty(
-        "--scroll",
-        max > 0 ? String(root.scrollTop / max) : "0",
-      );
+      if (scrollRaf) return;
+      scrollRaf = requestAnimationFrame(() => {
+        scrollRaf = 0;
+        const max = root.scrollHeight - root.clientHeight;
+        root.style.setProperty(
+          "--scroll",
+          max > 0 ? String(root.scrollTop / max) : "0",
+        );
 
-      if (coverHasPlayed()) {
+        if (coverHasPlayed()) {
+          root.style.setProperty("--intro", "1");
+          root.classList.add("intro-done");
+          root.classList.remove("peeling");
+          return;
+        }
+
+        if (shouldPlayCover() || document.getElementById("photo-intro")) {
+          return;
+        }
+
         root.style.setProperty("--intro", "1");
         root.classList.add("intro-done");
         root.classList.remove("peeling");
-        return;
-      }
-
-      if (shouldPlayCover() || document.getElementById("photo-intro")) {
-        return;
-      }
-
-      root.style.setProperty("--intro", "1");
-      root.classList.add("intro-done");
-      root.classList.remove("peeling");
+      });
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -95,7 +100,10 @@ export function ScrollFX() {
       document.querySelectorAll("[data-reveal]").forEach((node) => {
         node.classList.add("is-in");
       });
-      return () => window.removeEventListener("scroll", onScroll);
+      return () => {
+        window.removeEventListener("scroll", onScroll);
+        if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      };
     }
 
     const io = new IntersectionObserver(
@@ -111,6 +119,7 @@ export function ScrollFX() {
     return () => {
       io.disconnect();
       window.removeEventListener("scroll", onScroll);
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
     };
   }, [pathname]);
 

@@ -3656,14 +3656,13 @@ html[data-theme="dark"] .shot-cta {
   transform: scale(0.97);
 }
 
-@media (hover: none) {
-  .shot-open {
-    cursor: pointer;
+@media (hover: none), (pointer: coarse) {
+  .grain {
+    display: none;
   }
 
-  .shot-cta,
-  .frame-cta {
-    display: none;
+  .photo-print {
+    will-change: auto;
   }
 }
 
@@ -4707,6 +4706,30 @@ html[data-theme="dark"] .device-stage-violet {
   :root {
     --gutter: 24px;
     --nav-h: 68px;
+  }
+
+  /* SVG noise + blend-mode is a big mobile scroll cost */
+  .grain {
+    display: none;
+  }
+
+  .photo-print {
+    box-shadow: 0 8px 18px rgba(5, 46, 76, 0.1);
+    will-change: auto;
+    /* Prefer transform-only peel on phones — opacity thrash is costly */
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(var(--ox), var(--oy))
+      rotate(var(--or))
+      translate3d(
+        calc(var(--dx) * var(--intro)),
+        calc(var(--dy) * var(--intro)),
+        0
+      )
+      scale(calc(1 - var(--intro) * 0.08));
+  }
+
+  .photo-print img {
+    max-height: min(32vh, 280px);
   }
 
   .shell {

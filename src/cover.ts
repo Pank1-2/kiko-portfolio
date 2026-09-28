@@ -19,11 +19,18 @@ let consumed = false;
 let animating = false;
 let intro = 0;
 let touchY = 0;
+let touchAccum = 0;
 let attached = false;
 let absorbUntil = 0;
 let holdTimer = 0;
+let introRaf = 0;
+let pendingIntro: number | null = null;
 let skipHashOnBoot =
   Boolean(landedOnHome) && bootNav?.type === "reload";
+
+const isCoarsePointer = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(pointer: coarse), (hover: none)").matches;
 
 export function shouldPlayCover() {
   return landedOnHome && !consumed;
@@ -52,12 +59,21 @@ export function takeCoverBoot() {
   return true;
 }
 
-function applyIntro(value: number) {
-  intro = Math.min(1, Math.max(0, value));
+function flushIntro() {
+  introRaf = 0;
+  if (pendingIntro === null) return;
+  const value = pendingIntro;
+  pendingIntro = null;
+  intro = value;
   const root = document.documentElement;
   root.style.setProperty("--intro", intro.toFixed(4));
   root.classList.toggle("peeling", !consumed && intro < 1);
   root.classList.toggle("intro-done", consumed || intro >= 0.98);
+}
+
+function applyIntro(value: number) {
+  pendingIntro = Math.min(1, Math.max(0, value));
+  if (!introRaf) introRaf = requestAnimationFrame(flushIntro);
 }
 
 function holdPage(ms = 800) {
@@ -75,8 +91,9 @@ function holdPage(ms = 800) {
 function bump(delta: number) {
   if (consumed || animating) return;
   if (delta <= 0 && intro <= 0) return;
-  applyIntro(intro + delta);
-  if (intro >= 1) consumeCover();
+  const next = Math.min(1, Math.max(0, intro + delta));
+  applyIntro(next);
+  if (next >= 1) consumeCover();
 }
 
 function onWheel(event: WheelEvent) {
@@ -88,6 +105,13 @@ function onWheel(event: WheelEvent) {
   if (consumed) return;
   event.preventDefault();
   if (animating) return;
+
+  // Phones/tablets: one decisive gesture opens the cover (avoids per-frame CSS thrash)
+  if (isCoarsePointer()) {
+    if (event.deltaY > 0) playCoverOpen();
+    return;
+  }
+
   const step =
     Math.sign(event.deltaY) * Math.min(Math.abs(event.deltaY) / 1200, 0.1);
   bump(step);
@@ -95,6 +119,7 @@ function onWheel(event: WheelEvent) {
 
 function onTouchStart(event: TouchEvent) {
   touchY = event.touches[0]?.clientY ?? 0;
+  touchAccum = 0;
 }
 
 function onTouchMove(event: TouchEvent) {
@@ -105,10 +130,20 @@ function onTouchMove(event: TouchEvent) {
   }
   if (consumed || animating) return;
   event.preventDefault();
+
   const y = event.touches[0]?.clientY ?? touchY;
-  const step = Math.min(Math.max((touchY - y) / 700, -0.1), 0.1);
-  bump(step);
+  const dy = touchY - y;
   touchY = y;
+
+  // Swipe up to open — don't scrub --intro on every touch move (lags on phones)
+  if (isCoarsePointer()) {
+    if (dy > 0) touchAccum += dy;
+    if (touchAccum > 48) playCoverOpen();
+    return;
+  }
+
+  const step = Math.min(Math.max(dy / 700, -0.1), 0.1);
+  bump(step);
 }
 
 function onKeyDown(event: KeyboardEvent) {
@@ -130,9 +165,15 @@ export function playCoverOpen() {
   if (consumed || animating) return;
 
   animating = true;
+  // Sync any pending scrub before the open animation
+  if (introRaf) {
+    cancelAnimationFrame(introRaf);
+    flushIntro();
+  }
   const from = intro;
   const start = performance.now();
-  const duration = 1200;
+  // Slightly snappier on touch so it doesn't feel sticky
+  const duration = isCoarsePointer() ? 720 : 1200;
 
   const tick = (now: number) => {
     if (consumed) {
@@ -141,7 +182,11 @@ export function playCoverOpen() {
     }
     const t = Math.min(1, (now - start) / duration);
     const eased = 1 - (1 - t) ** 3;
-    applyIntro(from + (1 - from) * eased);
+    // Write directly during the open animation (already rAF-paced)
+    intro = from + (1 - from) * eased;
+    const root = document.documentElement;
+    root.style.setProperty("--intro", intro.toFixed(4));
+    root.classList.toggle("peeling", intro < 1);
     if (t < 1) {
       requestAnimationFrame(tick);
       return;
@@ -157,12 +202,19 @@ export function startCover() {
   consumed = false;
   animating = false;
   intro = 0;
+  touchAccum = 0;
   absorbUntil = 0;
+  pendingIntro = null;
+  if (introRaf) {
+    cancelAnimationFrame(introRaf);
+    introRaf = 0;
+  }
   const root = document.documentElement;
   root.classList.remove("intro-done");
   root.classList.remove("cover-hold");
-  applyIntro(0);
+  root.style.setProperty("--intro", "0");
   root.classList.add("peeling");
+  root.classList.remove("intro-done");
   bindCoverGestures();
 }
 
@@ -176,6 +228,15 @@ export function bindCoverGestures() {
   }
 }
 
+function unbindCoverGestures() {
+  if (!attached) return;
+  attached = false;
+  window.removeEventListener("wheel", onWheel, true);
+  window.removeEventListener("touchstart", onTouchStart, true);
+  window.removeEventListener("touchmove", onTouchMove, true);
+  window.removeEventListener("keydown", onKeyDown, true);
+}
+
 export function consumeCover() {
   const hold = Boolean(document.getElementById("photo-intro")) || animating;
 
@@ -187,6 +248,12 @@ export function consumeCover() {
   consumed = true;
   animating = false;
   intro = 1;
+  pendingIntro = null;
+  if (introRaf) {
+    cancelAnimationFrame(introRaf);
+    introRaf = 0;
+  }
+  unbindCoverGestures();
   const root = document.documentElement;
   const prev = root.style.scrollBehavior;
   root.style.scrollBehavior = "auto";

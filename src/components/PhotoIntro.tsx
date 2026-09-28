@@ -113,7 +113,7 @@ export function PhotoIntro({ onSkip }: Props) {
       <div className="cover-board">
         {frames.map((frame) => (
           <figure key={frame.src} className={`photo-print ${frame.className}`}>
-            <img src={frame.src} alt="" />
+            <img src={frame.src} alt="" decoding="async" loading="eager" />
           </figure>
         ))}
         <CoverHello />
