@@ -102,8 +102,36 @@ export const skills = [
 
 export const projects: Project[] = [
   {
-    slug: "alert-monitor",
+    slug: "expert-advice",
     frame: "01",
+    title: "Expert Advice Redesign",
+    category: "IBM Concert for Z · Enterprise software",
+    outcome:
+      "Reimagining how teams find, manage, and maintain KPI guidance within KPI Settings.",
+    summary: "Reimagining how teams find and maintain KPI guidance.",
+    image: "",
+    tags: ["Expert Advice", "SME notes", "KPI settings", "Information architecture"],
+    roleHeadline: "Lead designer",
+    teamHeadline: "Solo designer",
+    timeline: "1.5 months",
+    tools: "Figma, Figma Make",
+    device: "laptop",
+    stage: "navy",
+    overview: [],
+    /* Page copy and layout live in ExpertAdviceStudy. */
+    sections: [
+      { id: "context", heading: "Context" },
+      { id: "original", heading: "The original" },
+      { id: "better-design", heading: "The alternative approach" },
+      { id: "final-design", heading: "The refined design" },
+      { id: "moments", heading: "Design moments" },
+      { id: "impact", heading: "Impact" },
+      { id: "reflection", heading: "Reflection" },
+    ],
+  },
+  {
+    slug: "alert-monitor",
+    frame: "02",
     title: "Alert Monitor Creation",
     category: "IBM Concert for Z · Enterprise software",
     outcome:
@@ -111,20 +139,26 @@ export const projects: Project[] = [
     summary:
       "Bringing an existing alerting experience into Concert for Z.",
     image: asset("/work/ibm-concert.svg"),
-    tags: ["Product design", "Complex systems", "Design system"],
+    tags: ["Observability", "Complex workflow", "Prototyping", "AI-assisted"],
     roleHeadline: "UX Designer",
-    teamHeadline: "IBM",
-    timeline: "Ongoing",
-    tools: "Figma",
+    teamHeadline: "2 members",
+    timeline: "3.5 months",
+    tools: "Figma, Figma Make, IBM Bob",
     device: "laptop",
     stage: "navy",
-    comingSoon: true,
     overview: [],
-    sections: [],
+    /* Page copy and layout live in AlertStudy. Homepage card fields stay here. */
+    sections: [
+      { id: "context", heading: "Context" },
+      { id: "final-design", heading: "Final design" },
+      { id: "moments", heading: "Design moments" },
+      { id: "impact", heading: "Impact" },
+      { id: "reflection", heading: "Reflection" },
+    ],
   },
   {
     slug: "memory-box",
-    frame: "02",
+    frame: "03",
     title: "Memory Box",
     category: "Chrome extension",
     outcome:
@@ -249,7 +283,7 @@ export const projects: Project[] = [
   },
   {
     slug: "bloom-studio",
-    frame: "03",
+    frame: "04",
     title: "Bloom Studio Kiosk",
     category: "Physical kiosk · Interaction design",
     outcome:
@@ -457,7 +491,7 @@ export const projects: Project[] = [
   },
   {
     slug: "art-of-learning",
-    frame: "04",
+    frame: "05",
     title: "Project Art of Learning",
     category: "Nonprofit · Web experience",
     outcome:

@@ -14,7 +14,7 @@ function Hero() {
         <div>
           <p className="hero-chip mono">
             <span className="hero-chip-dot" aria-hidden="true" />
-            Hi, I’m Kiko
+            Hello, I’m Kiko
           </p>
           <h1 className="lede">
             I turn messy problems into <em>clear products</em>.

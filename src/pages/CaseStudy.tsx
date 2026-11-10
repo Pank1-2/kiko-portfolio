@@ -1,6 +1,11 @@
-import { Fragment, type MouseEvent, type ReactNode } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Fragment, useEffect, useState, type MouseEvent, type ReactNode } from "react";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { isCaseUnlocked, isLockedCase } from "../gate";
+import { PasswordGate } from "../components/PasswordGate";
+import { AlertStudy } from "../components/AlertStudy";
+import { ExpertAdviceStudy } from "../components/ExpertAdviceStudy";
 import { CardStage } from "../components/CardStage";
+import { StudyMeta } from "../components/StudyMeta";
 import { DeviceStage } from "../components/DeviceStage";
 import { Shots } from "../components/Shots";
 import { projects, type BlockKey, type Project, type StudySection } from "../data";
@@ -142,9 +147,56 @@ function block(
 
 export function CaseStudy() {
   const { slug } = useParams();
+  const navigate = useNavigate();
+  const [unlocked, setUnlocked] = useState(isCaseUnlocked);
   const published = projects.filter((item) => !item.comingSoon);
   const index = published.findIndex((item) => item.slug === slug);
   const project = published[index];
+  const toc = project
+    ? [
+        ...(project.overview.length ? [{ id: "overview", label: "Overview" }] : []),
+        ...(project.thoughts ? [{ id: "thinking", label: "Decisions" }] : []),
+        ...(project.journey ? [{ id: "journey", label: "Before / after" }] : []),
+        ...project.sections
+          .filter((section) => section.id !== "thinking")
+          .map((section) => ({ id: section.id, label: section.heading })),
+      ]
+    : [];
+  const sectionKey = toc.map((item) => item.id).join("|");
+  const [activeId, setActiveId] = useState(toc[0]?.id ?? "overview");
+
+  useEffect(() => {
+    const ids = sectionKey.split("|").filter(Boolean);
+    if (!ids.length) return;
+
+    const update = () => {
+      const nearBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 8;
+      const marker = Math.max(140, Math.min(window.innerHeight * 0.28, 240));
+      let current = ids[0];
+
+      if (!nearBottom) {
+        for (const id of ids) {
+          const el = document.getElementById(id);
+          if (!el) continue;
+          if (el.getBoundingClientRect().top <= marker) current = id;
+        }
+      } else {
+        current = ids[ids.length - 1];
+      }
+
+      setActiveId((prevId) => (prevId === current ? prevId : current));
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, [sectionKey]);
 
   if (!project) {
     return <Navigate to={{ pathname: "/", hash: "case-studies" }} replace />;
@@ -152,21 +204,31 @@ export function CaseStudy() {
 
   const prev = published[(index - 1 + published.length) % published.length];
   const next = published[(index + 1) % published.length];
+
+  if (isLockedCase(project.slug) && !unlocked) {
+    return (
+      <PasswordGate
+        onClose={() => navigate({ pathname: "/", hash: "case-studies" })}
+        onUnlock={() => setUnlocked(true)}
+      />
+    );
+  }
+
+  if (project.slug === "expert-advice") {
+    return <ExpertAdviceStudy project={project} prev={prev} next={next} />;
+  }
+
+  if (project.slug === "alert-monitor") {
+    return <AlertStudy project={project} prev={prev} next={next} />;
+  }
   const thinking = project.sections.find((section) => section.id === "thinking");
-  const toc = [
-    { id: "overview", label: "Overview" },
-    ...(project.thoughts ? [{ id: "thinking", label: "Decisions" }] : []),
-    ...(project.journey ? [{ id: "journey", label: "Before / after" }] : []),
-    ...project.sections
-      .filter((section) => section.id !== "thinking")
-      .map((section) => ({ id: section.id, label: section.heading })),
-  ];
 
   return (
     <main className="study">
       <header className="study-intro shell">
         <Link className="back mono" to={{ pathname: "/", hash: "case-studies" }}>
-          ← Case studies
+          <span aria-hidden="true">←</span>
+          Case studies
         </Link>
         <p className="mono study-kicker">
           <span className="study-kicker-frame">{project.frame}</span>
@@ -175,55 +237,7 @@ export function CaseStudy() {
         </p>
         <h1>{project.title}</h1>
         <p className="study-outcome">{project.outcome}</p>
-        <dl className="study-facts">
-          <div>
-            <dt>
-              <span className="fact-emoji" aria-hidden>
-                👤
-              </span>
-              Role
-            </dt>
-            <dd>
-              <strong>{project.roleHeadline}</strong>
-              {project.roleDetail ? <p>{project.roleDetail}</p> : null}
-            </dd>
-          </div>
-          <div>
-            <dt>
-              <span className="fact-emoji" aria-hidden>
-                ⏱️
-              </span>
-              Duration
-            </dt>
-            <dd>
-              <strong>{project.timeline}</strong>
-              {project.timelineDetail ? <p>{project.timelineDetail}</p> : null}
-            </dd>
-          </div>
-          <div>
-            <dt>
-              <span className="fact-emoji" aria-hidden>
-                👥
-              </span>
-              Team size
-            </dt>
-            <dd>
-              <strong>{project.teamHeadline}</strong>
-              {project.teamDetail ? <p>{project.teamDetail}</p> : null}
-            </dd>
-          </div>
-          <div>
-            <dt>
-              <span className="fact-emoji" aria-hidden>
-                🛠️
-              </span>
-              Tools
-            </dt>
-            <dd>
-              <strong>{project.tools}</strong>
-            </dd>
-          </div>
-        </dl>
+        <StudyMeta project={project} />
       </header>
 
       <div className="shell annotated-still" data-reveal>
@@ -240,19 +254,27 @@ export function CaseStudy() {
           <p className="mono rail-label">Sections</p>
           <nav className="study-toc">
             {toc.map((item) => (
-              <a key={item.id} href={`#${item.id}`} onClick={scrollToId(item.id)}>
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className={item.id === activeId ? "is-current" : undefined}
+                aria-current={item.id === activeId ? "true" : undefined}
+                onClick={scrollToId(item.id)}
+              >
                 {item.label}
               </a>
             ))}
           </nav>
         </aside>
         <article className="study-body">
-          <section id="overview" className="study-block" data-reveal>
-            <h2>Overview</h2>
-            {project.overview.map((paragraph) => (
-              <p key={paragraph}>{rich(paragraph)}</p>
-            ))}
-          </section>
+          {project.overview.length ? (
+            <section id="overview" className="study-block" data-reveal>
+              <h2>Overview</h2>
+              {project.overview.map((paragraph) => (
+                <p key={paragraph}>{rich(paragraph)}</p>
+              ))}
+            </section>
+          ) : null}
 
           {project.thoughts ? (
             <section id="thinking" className="study-block" data-reveal>

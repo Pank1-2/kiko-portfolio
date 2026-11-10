@@ -128,8 +128,11 @@ export function PhotoIntro({ onSkip }: Props) {
             <DraggableTag key={tag} label={tag} />
           ))}
         </ul>
-        <button type="button" className="btn ghost cover-enter" onClick={onSkip}>
+        <button type="button" className="btn cover-enter" onClick={onSkip}>
           View work
+          <span className="cover-enter-arrow" aria-hidden="true">
+            →
+          </span>
         </button>
       </div>
     </div>

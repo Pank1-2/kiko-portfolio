@@ -14,10 +14,14 @@ type Staging = {
  * Not project content — only how existing assets are staged in FrameCard.
  */
 const CARD_STAGING: Record<string, Staging> = {
-  // Editorial scope board — IBM Alert Monitor
+  "expert-advice": {
+    treatment: "solo",
+    shots: [asset("/images/expert-advice/final-overview.png")],
+  },
+  // Alert monitors table — same frame and motion as the other stills
   "alert-monitor": {
-    treatment: "model",
-    shots: [],
+    treatment: "solo",
+    shots: [asset("/images/alerting/config-table.png")],
   },
   // Single product still — readable on card + case study
   "memory-box": {
@@ -174,68 +178,6 @@ function DeviceFrame({
   );
 }
 
-function IbmModel() {
-  return (
-    <div className="ibm-cover" aria-hidden>
-      <div className="ibm-dash">
-        <div className="ibm-dash-top">
-          <span className="ibm-dash-dot" />
-          <span className="ibm-dash-dot" />
-          <span className="ibm-dash-dot" />
-          <span className="ibm-dash-search" />
-        </div>
-        <div className="ibm-dash-shell">
-          <div className="ibm-dash-rail">
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-          </div>
-          <div className="ibm-dash-body">
-            <div className="ibm-dash-kpis">
-              <span />
-              <span />
-              <span />
-              <span />
-            </div>
-            <div className="ibm-dash-panels">
-              <div className="ibm-dash-chart">
-                <span />
-                <span />
-                <span />
-                <span />
-                <span />
-                <span />
-                <span />
-              </div>
-              <div className="ibm-dash-stack">
-                <span />
-                <span />
-                <span />
-                <span />
-                <span />
-              </div>
-            </div>
-            <div className="ibm-dash-rows">
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="ibm-logo-hero">
-        <img className="ibm-cover-mark" src={asset("/ibm.svg")} alt="" />
-      </div>
-    </div>
-  );
-}
-
 type Props = {
   slug: string;
   src: string;
@@ -339,8 +281,10 @@ export function CardStage({
         ? "#14182e"
         : slug === "bloom-studio"
           ? "#2f4538"
+          : slug === "expert-advice"
+            ? "#d5ebe4"
           : slug === "alert-monitor"
-            ? "#001d6c"
+            ? "#e4d4ea"
             : treatment === "model"
               ? "#1c2740"
               : sampled.base;
@@ -351,8 +295,10 @@ export function CardStage({
         ? "#7b8ff5"
         : slug === "bloom-studio"
           ? "#b7d4a8"
+          : slug === "expert-advice"
+            ? "#8fd4c8"
           : slug === "alert-monitor"
-            ? "#4589ff"
+            ? "#d5d0f7"
             : treatment === "model"
               ? "#7eb6ff"
               : sampled.glow;
@@ -369,20 +315,25 @@ export function CardStage({
     <div
       ref={rootRef}
       className={`card-stage card-stage--${stage} card-stage--${treatment}${
-        slug === "alert-monitor" ? " card-stage--ibm" : ""
-      }${slug === "memory-box" ? " card-stage--memory" : ""}${
+        slug === "expert-advice" ? " card-stage--advice" : ""
+      }${slug === "alert-monitor" ? " card-stage--ibm" : ""}${slug === "memory-box" ? " card-stage--memory" : ""}${
         slug === "bloom-studio" ? " card-stage--bloom" : ""
       }${slug === "art-of-learning" ? " card-stage--learning" : ""}`}
       style={style}
       data-treatment={treatment}
     >
-      {treatment === "model" ? <IbmModel /> : null}
-
       {treatment === "solo" ? (
         <div className="card-stage-scene card-stage-scene--solo">
           <span className="solo-glow" aria-hidden />
           <div className="card-stage-shot card-stage-shot--solo">
-            <DeviceFrame src={shots[0]} alt={alt} plain />
+            {shots[0] ? (
+              <DeviceFrame src={shots[0]} alt={alt} plain />
+            ) : (
+              <div className="card-stage-plain card-stage-hold">
+                <span className="case-image-type">Cover</span>
+                <strong>Expert Advice</strong>
+              </div>
+            )}
           </div>
         </div>
       ) : null}
