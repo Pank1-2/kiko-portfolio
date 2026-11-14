@@ -1,6 +1,7 @@
 import { useEffect, useId, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { asset } from "../asset";
 import { consumeCover } from "../cover";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -79,7 +80,7 @@ export function Nav() {
         About
       </NavLink>
       <a
-        href="https://drive.google.com/file/d/1zIgUrUnQ81I9cpqMX2nbtHMpaYeTsQ2F/view?usp=sharing"
+        href={asset("/kpan-resume.pdf")}
         target="_blank"
         rel="noreferrer"
         onClick={closeMenu}
